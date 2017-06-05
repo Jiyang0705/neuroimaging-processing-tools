@@ -3,7 +3,26 @@
 % ------------------
 %
 % DESCRIPTION:
-
+%   Generate a webpage to view the slices of multiple images
+%
+% INPUT:
+%   pair1_CellArrVertical = vertical cell array containing path to base 
+%   images
+%
+%   otherPairs_CellArrVertical = vertical cell array containing path to
+%   other image counterparts. If there are more than one counterpart image,
+%   put each of them horizontally. i.e. number of columns equals to
+%   number of counterpart images.
+%
+%   outputDir = path to directory containing output
+%
+%   title = title of the webpage
+%
+%   outputFormat = 'web', 'arch', 'web&arch'
+%
+% OUTPUT:
+%   A webpage will automatically display on screeen, or be archived as zip file.
+%
 
 
 function webViewSlices_pair (pair1_CellArrVertical, otherPairs_CellArrVertical, outputDir, title, outputFormat)

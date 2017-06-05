@@ -1,22 +1,27 @@
-% ------------------
+% ---------------------
 % webViewSlices_overlay
-% ------------------
+% ---------------------
 %
 % DESCRIPTION:
 %   Generate a webpage to view the slices of base-overlay image pairs
 %
 % INPUT:
-%   baseImgCellArrVertical = vertical cell array containing path to base
+%   baseImgCellArrVertical = vertical cell array containing path to base 
 %   images
+%
 %   overlayImgCellArrVertical = vertical cell array containing path to
 %   overlay images. If more than one overlay images for each base image,
 %   put each overlay image horizontally. i.e. number of columns equals to
 %   number of overlay images for each base image.
+%
 %   outputDir = path to directory containing output
+%
+%   title = title of the webpage
+%
 %   outputFormat = 'web', 'arch', 'web&arch'
 %
 % OUTPUT:
-%   A webpage will automatically display on screeen.
+%   A webpage will automatically display on screeen, or be archived as zip file.
 %
 
 
