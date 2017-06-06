@@ -35,6 +35,12 @@ if exist ([outputDir '/' title '.html'],'file') == 2
     delete([outputDir '/' title '.html']);
 end
 
+if exist ([outputDir '/png'], 'dir') ==7
+    rmdir ([outputDir '/png'], 's');
+end
+
+mkdir (outputDir, 'png');
+
 [N_subj, N_otherPairs] = size (otherPairs_CellArrVertical);
 fprintf ('webViewSlices_pair: %d counterpart/s.\n', N_otherPairs);
 [Npair1,~] = size(pair1_CellArrVertical);
@@ -106,12 +112,12 @@ switch outputFormat
         fprintf ('webViewSlices_pair: Generating webpage ...\n');
         web ([outputDir '/' title '.html'], '-new');
     case 'arch'
-        fprintf ('webViewSlices_pair: Archiving for download ...\n');
+        fprintf ('webViewSlices_pair: Archiving ...\n');
         archive (outputDir, title);
     case 'web&arch'
         fprintf ('webViewSlices_pair: Generating webpage ...\n');
         web ([outputDir '/' title '.html'], '-new');
-        fprintf ('webViewSlices_pair: Archiving for download ...\n');
+        fprintf ('webViewSlices_pair: Archiving ...\n');
         archive (outputDir, title);
 end
 
@@ -119,15 +125,9 @@ end
 fprintf('webViewSlices_pair: Done.\n');
 
 function archive (outputDir, title)
-    if exist ([outputDir '/download'], 'dir') == 7
-        rmdir ([outputDir '/download'], 's');
-    end
-    mkdir (outputDir, 'download');
-    system (['cp ' outputDir '/*.png ' outputDir '/download/.']);
+ 
     outputDir_shell = strrep (outputDir, '/', '\/');
-    system (['cp ' outputDir '/' title '.html ' outputDir '/download/.']);
-    system (['sed -i.bak ''s/' outputDir_shell '/\./g'' ' outputDir '/download/' title '.html']);
+    system (['sed -i.bak ''s/' outputDir_shell '/\./g'' ' outputDir '/' title '.html']);
+    zip ([outputDir '/' title '.zip'], {'png/*.png', '*.html'}, outputDir);
     
-    zip ([outputDir '/' title '.zip'], {'*.png', '*.html'}, [outputDir '/download']);
-    
-    fprintf (['Download link: ' outputDir '/' title '.zip\n']);
+    fprintf (['Link: ' outputDir '/' title '.zip\n']);

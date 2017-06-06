@@ -14,10 +14,6 @@ CNSP_webViewSlices_sliceOverlayOnBaseImg(){
 
 	overlayOnBaseImg=`echo ${overlayImgFilename}_on_${baseImgFilename}`
 
-	if [ ! -d "${outputDir}/png" ]; then
-		mkdir ${outputDir}/png
-	fi
-
 	# min_baseImg=`${FSLDIR}/bin/fslstats ${baseImgFolder}/${baseImgFilename} -R | awk '{print $1}'`
 	# max_baseImg=`${FSLDIR}/bin/fslstats ${baseImgFolder}/${baseImgFilename} -R | awk '{print $2}'`
 	min_baseImg=0

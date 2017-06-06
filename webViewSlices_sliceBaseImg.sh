@@ -7,10 +7,6 @@ CNSP_webViewSlices_sliceBaseImg(){
 	baseImgFolder=$1
 	baseImgFilename=`echo $2 | awk -F'.' '{print $1}'`
 	outputDir=$3
-	
-	if [ ! -d "${outputDir}/png" ]; then
-		mkdir ${outputDir}/png
-	fi
 
 	# min_baseImg=`${FSLDIR}/bin/fslstats ${baseImgFolder}/${baseImgFilename} -R | awk '{print $1}'`
 	# max_baseImg=`${FSLDIR}/bin/fslstats ${baseImgFolder}/${baseImgFilename} -R | awk '{print $2}'`

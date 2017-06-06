@@ -35,6 +35,12 @@ if exist ([outputDir '/' title '.html'],'file') == 2
     delete([outputDir '/' title '.html']);
 end
 
+if exist ([outputDir '/png'], 'dir') ==7
+    rmdir ([outputDir '/png'], 's');
+end
+
+mkdir (outputDir, 'png');
+
 [Nsubj, Noverlay] = size (overlayImgCellArrVertical);
 fprintf ('webViewSlices_overlay: %d overlay image/s.\n', Noverlay);
 [Nbaseimgs,~] = size(baseImgCellArrVertical);
@@ -110,12 +116,12 @@ switch outputFormat
         fprintf ('webViewSlices_overlay: Generating webpage ...\n');
         web ([outputDir '/' title '.html'], '-new');
     case 'arch'
-        fprintf ('webViewSlices_overlay: Archiving for download ...\n');
+        fprintf ('webViewSlices_overlay: Archiving ...\n');
         archive (outputDir, title);
     case 'web&arch'
         fprintf ('webViewSlices_overlay: Generating webpage ...\n');
         web ([outputDir '/' title '.html'], '-new');
-        fprintf ('webViewSlices_overlay: Archiving for download ...\n');
+        fprintf ('webViewSlices_overlay: Archiving ...\n');
         archive (outputDir, title);
 end
 
@@ -127,17 +133,11 @@ fprintf('webViewSlices_overlay: Done.\n');
 
 
 function archive (outputDir, title)
-    % if exist ([outputDir '/archive'], 'dir') == 7
-    %     rmdir ([outputDir '/archive'], 's');
-    % end
-    % mkdir (outputDir, 'archive');
-    % system (['cp ' outputDir '/*.png ' outputDir '/download/.']);
+
     outputDir_shell = strrep (outputDir, '/', '\/');
-    % system (['cp ' outputDir '/' title '.html ' outputDir '/download/.']);
-    system (['sed -i.bak ''s/' outputDir_shell '/\./png/g'' ' outputDir '/' title '.html']);
-    
+    system (['sed -i.bak ''s/' outputDir_shell '/png/g'' ' outputDir '/' title '.html']);
     zip ([outputDir '/' title '.zip'], {'png/*.png', '*.html'}, outputDir);
     
-    fprintf (['Download link: ' outputDir '/' title '.zip\n']);
+    fprintf (['Link: ' outputDir '/' title '.zip\n']);
 
 
